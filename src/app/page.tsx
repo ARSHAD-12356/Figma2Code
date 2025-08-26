@@ -35,7 +35,7 @@ export default function Home() {
         muted
         playsInline
         className="absolute top-0 left-0 w-full h-full object-cover -z-10"
-        src="https://videos.pexels.com/video-files/3129959/3129959-hd_1920_1080_25fps.mp4"
+        src="https://videos.pexels.com/video-files/857251/857251-hd_1920_1080_25fps.mp4"
       />
       <div className="absolute top-0 left-0 w-full h-full bg-black/50 -z-10" />
       
