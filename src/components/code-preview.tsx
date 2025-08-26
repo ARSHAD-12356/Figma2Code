@@ -86,6 +86,9 @@ export function CodePreview({ code, isLoading, error }: CodePreviewProps) {
     const zip = new JSZip();
     zip.file('index.html', code.htmlCode);
     zip.file('styles.css', code.cssCode);
+    if (code.jsCode) {
+      zip.file('script.js', code.jsCode);
+    }
     zip.generateAsync({ type: 'blob' }).then(content => {
       saveAs(content, 'figma2code.zip');
     });
@@ -98,7 +101,7 @@ export function CodePreview({ code, isLoading, error }: CodePreviewProps) {
           <div>
             <CardTitle>2. Generated Code</CardTitle>
             <CardDescription>
-              Preview the HTML and CSS. You can copy or download the files.
+              Preview the HTML, CSS, and JS. You can copy or download the files.
             </CardDescription>
           </div>
           {code && (
@@ -118,6 +121,7 @@ export function CodePreview({ code, isLoading, error }: CodePreviewProps) {
             <TabsList>
               <TabsTrigger value="html">HTML</TabsTrigger>
               <TabsTrigger value="css">CSS</TabsTrigger>
+              {code.jsCode && <TabsTrigger value="js">JavaScript</TabsTrigger>}
             </TabsList>
             <TabsContent value="html" className="flex-grow mt-4">
               <CodeBlock code={code.htmlCode} />
@@ -125,6 +129,11 @@ export function CodePreview({ code, isLoading, error }: CodePreviewProps) {
             <TabsContent value="css" className="flex-grow mt-4">
               <CodeBlock code={code.cssCode} />
             </TabsContent>
+            {code.jsCode && (
+              <TabsContent value="js" className="flex-grow mt-4">
+                <CodeBlock code={code.jsCode} />
+              </TabsContent>
+            )}
           </Tabs>
         )}
       </CardContent>

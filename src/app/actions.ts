@@ -38,6 +38,7 @@ export async function generateCodeAction(figmaUrl: string): Promise<State> {
         <p>This is a mock response.</p>
         <button class="btn">Click Me</button>
     </div>
+    <script src="script.js"></script>
 </body>
 </html>`, 
                 cssCode: `body {
@@ -62,7 +63,10 @@ export async function generateCodeAction(figmaUrl: string): Promise<State> {
     padding: 0.8rem 1.5rem;
     border-radius: 4px;
     cursor: pointer;
-}` 
+}`,
+                jsCode: `document.querySelector('.btn').addEventListener('click', () => {
+    alert('Button clicked!');
+});`
             }, 
             error: null 
         };

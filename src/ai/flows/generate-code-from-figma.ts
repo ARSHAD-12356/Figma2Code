@@ -1,6 +1,6 @@
 'use server';
 /**
- * @fileOverview Generates HTML and CSS code from a Figma design URL.
+ * @fileOverview Generates HTML, CSS, and JavaScript code from a Figma design URL.
  *
  * - generateCode - A function that handles the code generation process.
  * - GenerateCodeInput - The input type for the generateCode function.
@@ -18,6 +18,7 @@ export type GenerateCodeInput = z.infer<typeof GenerateCodeInputSchema>;
 const GenerateCodeOutputSchema = z.object({
   htmlCode: z.string().describe('The generated HTML code.'),
   cssCode: z.string().describe('The generated CSS code.'),
+  jsCode: z.string().optional().describe('The generated JavaScript code, if any.'),
 });
 export type GenerateCodeOutput = z.infer<typeof GenerateCodeOutputSchema>;
 
@@ -38,11 +39,13 @@ const prompt = ai.definePrompt({
 
   Ensure the HTML is well-structured and semantic.
   Provide modern CSS code, make sure it is compatible with the HTML code.
+  If there is any interactivity in the design, provide JavaScript code for it.
 
   Output the code in a format that can be easily copied and pasted into a project.
   Do not include any explanations or comments in the code.
   HTML code:
   CSS code:
+  JavaScript code:
 `,
 });
 
